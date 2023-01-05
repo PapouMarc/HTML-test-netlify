@@ -1,0 +1,78 @@
+*{
+    box-sizing:border-box;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+    margin:20px;
+}
+
+.carrousel_parent-ecrans{
+    display:flex;
+    width:100%;
+    overflow-x:scroll;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory; /*evite de deborder l'image*/
+}
+
+.carrousel_ecran{
+    width:100%;
+    flex:none;
+    scroll-snap-align: start;
+}
+
+.carrousel_ecran figure{
+    margin:0;
+}
+
+.carrousel {
+    position: relative;
+}
+
+.carrousel_btn {
+    position: absolute;
+    top: 50%; /* centre verticalement */
+    transform: translateY(-50%); /* methode du point mort */
+    width: 2rem;
+    height: 2rem;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    border: none;
+    display: grid;
+    place-content: center;
+    color: #fff;
+}
+
+.carrousel_btn-avant {
+    left: 0;
+}
+  
+  .carrousel_btn-apres {
+    right: 0;
+}
+
+.caroussel_liste-liens{
+    display:flex;
+    justify-content:center;
+    list-style:none;
+    padding:0;
+    margin:0;
+    gap:1rem;
+}
+
+/*.caroussel_liste-liens li> a.actif {
+}*/
+
+a{
+    text-decoration:none;
+    border:2px solid black;
+    border-radius:5px;
+    padding:10px;
+    color:white;
+    background-color:black;
+}
+
+li.actif {
+    background-color:white;
+}
