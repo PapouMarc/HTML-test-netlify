@@ -5,31 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
-
-    <script src="//unpkg.com/alpinejs" defer></script>
-
+    <!-- cdn alpinejs -->
+    <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+    <!-- cdn tailwindcss -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div x-data="{ open: false }">
-        <button @click="open = ! open">Toggle</button>
-     
-        <div
-            x-show="open"
-            x-transition:enter="transition ease-out duration-500"
-            x-transition:enter-start="opacity-0 scale-90"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-500"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90"
-        >
-        <div id="ecran-1" class="carrousel_ecran">
-            <figure>
-                <img src="./assets/img/1.jpg" alt="image ecran 1">
-                <figcaption>Ecran 1</figcaption>
-            </figure>
-        </div>
-
-        </div>
+    
+    <div x-data="{open: false, alt:null , src:null , alt1:null , src1:null,imgdata: [
+                            { id: 1, src: './assets/img/1.jpg', alt:'image ecran 1' },
+                            { id: 2, src: './assets/img/2.jpg', alt:'image ecran 2' },
+                            { id: 3, src: './assets/img/3.jpg', alt:'image ecran 3' }
+                          ]}">
+            <template x-for="nimg in imgdata" :key="nimg.id">
+                <button @click="src=nimg.src,alt=nimg.alt,open = ! open;" 
+                        x-text="' Ecran ' +nimg.id+' '"></button>
+            </template>
+            <br/>
+            <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-1000"
+                x-transition:enter-start="opacity-0 scale-90"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-1000"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-90"
+                x-on:transitionstart="$dispatch(console.log('transitionstarted:'+src))"
+                x-on:transitionend="if (! open) $dispatch(src1 = src,alt1 = alt,open = ! open,'transitionend:'+src)"
+                x-init="src1='./assets/img/1.jpg',alt='image ecran 1'">
+                        <figure>
+                            <img :src="src1" :alt="alt1">
+                            <figcaption x-text="alt1"></figcaption>
+                        </figure>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <p x-text="src"></p>
+            </div>
     </div>
 
 </body>
